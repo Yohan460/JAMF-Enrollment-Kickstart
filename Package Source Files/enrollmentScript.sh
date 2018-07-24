@@ -40,7 +40,7 @@ logme "======== Starting Configiration Policy Script ========"
 while [ $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }') == '_mbsetupuser' ]; do
 
 	# Logging the user lookup
-    logme "User Logged inCheck failed, waiting 10 seconds"
+    logme "User Logged in check failed, waiting 10 seconds"
 
 	# Waiting
     sleep 10
