@@ -2,7 +2,7 @@
 #
 # Author: Johan McGwire - Yohan @ Macadmins Slack - Johan@McGwire.tech
 #
-# Description: This script is used to reapeatdly call a policy trigger until removed and unloaded. 
+# Description: This script is used to repeatedly call a policy trigger until removed and unloaded. 
 
 # Establishing the logging variables
 LOGFOLDER="/var/log"
