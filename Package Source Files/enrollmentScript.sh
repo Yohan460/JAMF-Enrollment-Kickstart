@@ -2,7 +2,7 @@
 #
 # Author: Johan McGwire - Yohan @ Macadmins Slack - Johan@McGwire.tech
 #
-# Description: This script is used to repeatedly call a policy trigger until removed and unloaded. 
+# Description: This script is used to reapeatdly call a policy trigger until removed and unloaded. 
 
 # Establishing the logging variables
 LOGFOLDER="/var/log"
@@ -40,7 +40,7 @@ logme "======== Starting Configiration Policy Script ========"
 while [ $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }') == '_mbsetupuser' ]; do
 
 	# Logging the user lookup
-    logme "User Logged in check failed, waiting 10 seconds"
+    logme "User Logged in Check failed, waiting 10 seconds"
 
 	# Waiting
     sleep 10
@@ -74,15 +74,21 @@ logme "Internet connection verified"
 # Sleeping to ensure correct policy call
 sleep 5
 
-# Running the policy
-logme "Calling the jamf policy with an InitialConfig trigger"
-/usr/local/bin/jamf policy -trigger InitialConfig
-returnCode=$?
+if [[ ! -f "/Library/InitialConfiguration/.InitialConfigurationComplete" ]]; then
 
-if [[ "${returnCode}" == "0" ]]; then
-	logme "Policy call successful"
+	# Running the policy
+	logme "Calling the jamf policy with an InitialConfig trigger"
+	caffeinate -disu bash -c '/usr/local/bin/jamf policy -trigger InitialConfig'
+	returnCode=$?
+
+	if [[ "${returnCode}" == "0" ]]; then
+		logme "Policy call successful"
+	else
+		logme "FAILED policy call"
+	fi
 else
-	logme "FAILED policy call"
+
+	logme "Configuration Receipt present, Not calling setup policy"
 fi
 
 # Initializing log
