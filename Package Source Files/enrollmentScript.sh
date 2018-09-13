@@ -36,17 +36,26 @@ function logme()
 # Initializing log
 logme "======== Starting Configiration Policy Script ========"
 
-# Checking for the currently logged in user
-while [ $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }') == '_mbsetupuser' ]; do
+if [[ -f "/Library/InitialConfiguration/.InitalConfigSkipCheckUser" ]]; then
 
-	# Logging the user lookup
-    logme "User Logged in Check failed, waiting 10 seconds"
+	logme "Login Window runtime detected, skipping user check"
 
-	# Waiting
-    sleep 10
-done
+else
 
-logme "Logged in user: $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')"
+	# Checking for the currently logged in user
+	while [ $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }') == '_mbsetupuser' ]; do
+
+		# Logging the user lookup
+	    logme "User Logged in Check failed, waiting 10 seconds"
+
+		# Waiting
+	    sleep 10
+	done
+
+	logme "Logged in user: $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')"
+
+fi
+
 logme "Running as: $(whoami)"
 
 # Checking for an internet connection
