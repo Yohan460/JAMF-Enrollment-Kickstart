@@ -4,7 +4,9 @@
 #
 # Description: This writes out a Initial Configuration skip user check receipt
 
-# Writing out a  receipt
+# Creating directory and writing receipt
+mkdir /Library/InitialConfiguration
+chmod 775 /Library/InitialConfiguration
 touch /Library/InitialConfiguration/.InitalConfigSkipCheckUser
 
 # Exiting and returning the policy call code
