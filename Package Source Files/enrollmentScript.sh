@@ -34,7 +34,7 @@ function logme()
 }
 
 # Initializing log
-logme "======== Starting Configiration Policy Script ========"
+logme "======== Starting Configuration Policy Script ========"
 
 if [[ -f "/Library/InitialConfiguration/.InitalConfigSkipCheckUser" ]]; then
 
@@ -101,7 +101,7 @@ else
 fi
 
 # Initializing log
-logme "======== Finished Configiration Policy Script ========"
+logme "======== Finished Configuration Policy Script ========"
 
 # Exiting and returning the policy call code (never actually reaches this point due to stoping after the reload)
 exit $returnCode
