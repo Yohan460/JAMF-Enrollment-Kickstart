@@ -43,7 +43,7 @@ if [[ -f "/Library/InitialConfiguration/.InitalConfigSkipCheckUser" ]]; then
 else
 
 	# Checking for the currently logged in user
-	while [ $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }') == '_mbsetupuser' ]; do
+	while [ $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }') == '_mbsetupuser' || $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }') == 'root' ]; do
 
 		# Logging the user lookup
 	    logme "User Logged in Check failed, waiting 10 seconds"
@@ -100,7 +100,7 @@ else
 	logme "Configuration Receipt present, Not calling setup policy"
 fi
 
-# Initializing log
+# Closing log
 logme "======== Finished Configuration Policy Script ========"
 
 # Exiting and returning the policy call code (never actually reaches this point due to stoping after the reload)
