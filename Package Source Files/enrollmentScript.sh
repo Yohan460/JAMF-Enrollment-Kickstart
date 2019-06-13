@@ -46,7 +46,7 @@ else
 	while [[ "$(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')" == '_mbsetupuser' || "$(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')" == 'root' ]]; do
 
 		# Logging the user lookup
-		echo "User Logged in Check failed, waiting 10 seconds: $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')"
+		logme "User Logged in Check failed, waiting 10 seconds: $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')"
 		
 		# Waiting
 		sleep 10
