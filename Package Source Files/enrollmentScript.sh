@@ -43,13 +43,13 @@ if [[ -f "/Library/InitialConfiguration/.InitalConfigSkipCheckUser" ]]; then
 else
 
 	# Checking for the currently logged in user
-	while [ $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }') == '_mbsetupuser' || $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }') == 'root' ]; do
+	while [[ "$(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')" == '_mbsetupuser' || "$(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')" == 'root' ]]; do
 
 		# Logging the user lookup
-	    logme "User Logged in Check failed, waiting 10 seconds"
-
+		echo "User Logged in Check failed, waiting 10 seconds: $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')"
+		
 		# Waiting
-	    sleep 10
+		sleep 10
 	done
 
 	logme "Logged in user: $(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')"
